@@ -3,8 +3,19 @@ import productModel from "../dao/models/product.model.js";
 
 const router = Router();
 
-//VER PRODUCTOS AGREGADOS
+// RUTA BASE 
 router.get("/", async (req, res) => {
+  try {
+    const products = await productModel.find().lean().exec();
+    res.render("home", { products, style: "index.css" });
+  } catch (error) {
+    console.log(error);
+    res.json({ result: "Error...", error });
+  }
+});
+
+//VER PRODUCTOS AGREGADOS CON QUERY
+router.get("/products", async (req, res) => {
   try {
     const products = await productModel.find().lean().exec();
 
@@ -19,7 +30,7 @@ router.get("/", async (req, res) => {
 });
 
 //VER PROD POR ID
-router.get("/:pid", async (req, res) => {
+router.get("/products/:pid", async (req, res) => {
   try {
     const pID = req.params.pid;
     const product = await productModel.findOne({ _id: pID }).lean().exec();
@@ -32,7 +43,7 @@ router.get("/:pid", async (req, res) => {
 });
 
 //AGREGAR PROD
-router.post("/", async (req, res) => {
+router.post("/products", async (req, res) => {
   try {
     const product = req.body;
     const newProduct = new productModel(product);
@@ -46,7 +57,7 @@ router.post("/", async (req, res) => {
 });
 
 //ELIMINAR PROD
-router.delete("/delete/:pid", async (req, res) => {
+router.get("/products/delete/:pid", async (req, res) => {
   try {
     const pID = req.params.pid;
     await productModel.deleteOne({ _id: pID });
@@ -59,7 +70,7 @@ router.delete("/delete/:pid", async (req, res) => {
 });
 
 //FORMULARIO PARA CREAR PRODS
-router.get("/create", async (req, res) => {
+router.get("/products/create", async (req, res) => {
   res.render("create", {});
 });
 
