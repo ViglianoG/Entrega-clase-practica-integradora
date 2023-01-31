@@ -30,6 +30,10 @@ button{
     margin-top: 20px;
     border: 1px black solid;
     border-radius: 5px;
-    width: 7%;
+    width: 15%;
     background-color: rgb(253, 253, 253);
+}
+
+.products div p{
+    font-size: 15px;
 }

@@ -1,10 +1,10 @@
 <div class="saludo">
-  <p>Lista de todos los productos agregados hasta el momento:</p>
+  <h2>Lista de todos los productos agregados hasta el momento:</h2>
   {{#if products}}
     <div class="products">
       {{#each products}}
         <div>
-          <h2>{{this.title}}</h2>
+          <h3>{{this.title}}</h3>
           <p>{{this.description}}</p>
           <h4>${{this.price}}</h4>
           <h5>Stock disponible: {{this.stock}}</h5>
